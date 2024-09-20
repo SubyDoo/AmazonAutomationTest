@@ -1,6 +1,5 @@
 package pages;
 
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -51,7 +49,6 @@ public class HomePage {
         WebElement parent = driver.findElement(By.cssSelector("div[class=\"nav-search-submit nav-sprite\"]"));
         String backgroundColor = parent.getCssValue("background-color");
         Assert.assertEquals("rgba(254, 189, 105, 1)", backgroundColor);
-
         return true;
     }
 
@@ -76,12 +73,11 @@ public class HomePage {
     }
 
     // checks the list of suggested searches see if it contains a specific term
-    public boolean checkSearchSuggestions(String searchTerm) throws InterruptedException {
-
-        wait.until(ExpectedConditions.visibilityOf(suggestedSearchList));
+    public boolean checkSearchSuggestions(String searchTerm) {
 
         // waits until suggested list is updated and checks for "sleep" in "veeva sleep"
-        wait.until(ExpectedConditions.refreshed(ExpectedConditions.textToBePresentInElement(suggestedSearchList, "sleep")));
+        wait.until(ExpectedConditions.visibilityOf(suggestedSearchList));
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.textToBePresentInElement(suggestedSearchList, searchTerm)));
 
         String suggestionList = suggestedSearchList.getText();
         // testing what is suggested
@@ -136,7 +132,6 @@ public class HomePage {
                 return passed;
             }
         }
-
         return passed;
     }
 
@@ -156,7 +151,6 @@ public class HomePage {
                 return passed;
             }
         }
-
         return passed;
     }
 }

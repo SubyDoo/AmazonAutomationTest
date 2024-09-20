@@ -7,17 +7,41 @@ Feature: searchbar feature
     When I click the search bar
     Then there are suggested searches
     When I type "Veeva" in the search bar
-    Then suggestions for "Veeva" are shown
+    Then suggestions for "veeva sleep" is shown
     When I remove text from the searchbar
     Then the search bar is visible
     When I click the search button
     Then I am on the homepage
+
     Then I type "Veeva" in the search bar
     When I click the search button
-    Then results for "Veeva" appear
+    Then results for "veeva" appear
+
     When I go to the homepage
     Then the search bar is visible
     When I click the search bar
     Then "Veeva" appears in the search history
     When I click "Veeva" in the search history
-    Then results for "Veeva" appear
+    Then results for "veeva" appear
+
+    When I go to the homepage
+    Then the search bar is visible
+    Then I type "this is a test" in the search bar
+    When I click the search button
+    Then results for "test" appear
+    Then there are "7" page results
+
+    When I click page "3" results
+    Then I am on page "3"
+    Then results for "test" appear
+
+    When I click page "Previous" results
+    Then I am on page "2"
+    Then results for "test" appear
+
+    When I click page "Next" results
+    Then I am on page "3"
+    Then results for "test" appear
+
+    When I click page "Next" results
+    Then I am on page "4"

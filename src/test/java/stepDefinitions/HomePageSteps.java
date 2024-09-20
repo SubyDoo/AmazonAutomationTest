@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.HomePage;
 import pages.ResultPage;
-
 import java.time.Duration;
 
 
@@ -40,6 +40,12 @@ public class HomePageSteps {
         resultPage= new ResultPage(driver);
     }
 
+    // exiting test and closing driver
+    @After
+    public void closeDown() {
+        driver.quit();
+        driver = null;
+    }
 
     @Given("I get to the homepage")
     public void iGetToTheHomepage() {
@@ -69,8 +75,8 @@ public class HomePageSteps {
         Assert.assertTrue(homePage.typeInSearchBar(givenSearchText));
     }
 
-    @Then("^suggestions for \"([^\"]*)\" are shown$")
-    public void suggestionsForXAreShown(String searchTerm) throws InterruptedException {
+    @Then("^suggestions for \"([^\"]*)\" is shown$")
+    public void suggestionsForXAreShown(String searchTerm) {
         Assert.assertTrue(homePage.checkSearchSuggestions(searchTerm));
     }
 
